@@ -26,7 +26,11 @@
 
 <script scoped>
 export default {
-
+  data(){
+    return {
+      
+    }
+  }
 }
 </script>
 

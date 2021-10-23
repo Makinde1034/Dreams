@@ -1,5 +1,6 @@
 
 import api from '../adapter/api.js'
+import router from '../router/index.js'
 
 const auth = {
     namespaced : true,
@@ -22,6 +23,7 @@ const auth = {
                     const token = res.data.token
                     localStorage.setItem("token",token)
                     commit("AUTH_SUCCESS")
+                    router.push('/dashboard')
                     resolve(res)  
                 }).catch((err)=>{
                     reject(err)

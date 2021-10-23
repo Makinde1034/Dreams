@@ -58,6 +58,11 @@ export default {
     font-weight: bold;
     border: none;
     cursor: pointer;
+    transition: 0.2s;
 ;
+}
+
+.nav ul button:hover{
+    opacity: 0.6;
 }
 </style>

@@ -26,7 +26,7 @@
       </button>
     </div>
     <p class="form_p">Already have an account ? Register</p>
-    <p>{{err_msg}}</p>
+    <p class="err_msg">{{err_msg}}</p>
    </form>
   </div>
 </template>
@@ -57,6 +57,13 @@ export default {
       is_loading : (state) => state.authModule.loading,
       err_msg : (state) => state.authModule.error_message
     })
+  },
+  mounted(){
+    const token = localStorage.getItem("token");
+
+    if(token){
+      this.$router.push("/dashboard")
+    }
   }
 }
 </script>
@@ -187,6 +194,13 @@ body{
     transform: translateX(0px);
     opacity: 1;
   }
+}
+
+.err_msg{
+  font-size: 14px;
+  color: rgb(223, 84, 84);
+  text-align: center;
+  margin-top: 10px;
 }
 
 </style>

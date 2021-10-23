@@ -2,7 +2,7 @@
   <div class="home" >
     <img src="../assets/undraw_friendship_mni7.svg" alt="">
     <h3>The travel diary you <br> ever dreamed of.</h3>
-    <p>Write your mmemries on your card, love, happy, joy, sometimes...sadn and painful . You fill in all your feelings.</p>
+    <p>Write your memories on your card, love, happy, joy, sometimes...sad and painful. You fill in all your feelings.</p>
     <button>Sign up</button>
   </div>
 </template>
@@ -68,7 +68,6 @@ body{
   color: white;
   display: flex;
   align-items: center;
-  
   flex-direction: column;
 }
 
