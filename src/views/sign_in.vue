@@ -1,6 +1,6 @@
 <template>
   <div class="form__wrap">
-   <form class="form" action="">
+   <form @submit.prevent="sign_in" class="form" action="">
     <header class="form__header">
       <h3>Sign in</h3>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#fff" fill-opacity="1" d="M0,128L120,144C240,160,480,192,720,176C960,160,1200,96,1320,64L1440,32L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
@@ -8,27 +8,56 @@
     <div class="form__header__input">
       <div class="form__input__box">
         <label  for="Email">Email</label>
-        <input placeholder="example494" type="text">
+        <input v-model="user_details.email" placeholder="example494" required type="text">
       </div>
       
       <div class="form__input__box">
         <label  for="Email">Password</label>
-        <input placeholder="example494" type="text">
+        <input v-model="user_details.password" placeholder="example494" required type="password">
       </div>
     </div>
     <div class="form__button">
-      <button>Sign up</button>
+       <button>
+        <p v-if="!is_loading">Sign in</p>
+        <div v-else class="loader"></div>
+      </button>
     </div>
-    <p>Already have an account ? Register</p>
+    <p class="form_p">Already have an account ? Register</p>
+    <p class="err_msg">{{err_msg}}</p>
    </form>
   </div>
 </template>
 
 <script scoped>
+import { mapActions,mapState } from 'vuex'
+
 export default {
   data(){
     return {
-      
+      user_details : {
+        email : "",
+        password : ""
+      }
+    }
+  },
+  methods : {
+    ...mapActions('authModule',["SIGN_IN"]),
+
+    sign_in(){
+      this.SIGN_IN(this.user_details)
+    }
+  },
+  computed : {
+    ...mapState({
+      is_loading : (state) => state.authModule.loading,
+      err_msg : (state) => state.authModule.error_message
+    })
+  },
+  mounted(){
+    const token = localStorage.getItem("token");
+
+    if(token){
+      this.$router.push("/dashboard")
     }
   }
 }
@@ -127,12 +156,49 @@ body{
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: 0.5s;
 }
 
-.form p{
+.form__button button:hover{
+  opacity: 0.8;
+}
+
+.form_p{
   text-align: center;
   font-size: 12px;
   margin-top: 20px;
   cursor: pointer;
 }
+
+.loader{
+  height: 10px;
+  width: 10px;
+  background: white;
+  border-radius: 100%;
+  animation: load 0.5s ease infinite alternate;
+}
+
+@keyframes load {
+  0%{
+    transform: translateX(5px);
+    opacity: 1;
+  }
+  50%{
+    transform: translateX(10px);
+    opacity: 0;
+  }
+  100%{
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+.err_msg{
+  font-size: 14px;
+  color: rgb(223, 84, 84);
+  text-align: center;
+  margin-top: 10px;
+}
+
+
 </style>

@@ -9,15 +9,21 @@
         <router-link to="/signin">Signin</router-link>
         <router-link to="/signup">
             <button>Sign up</button>
-        </router-link>>
+        </router-link>
         
       </ul>
   </nav>
 </template>
 
 <script>
-export default {
+// import {mapState,mapActions} from 'vuex'
 
+export default {
+    computed : {
+        // ...mapState({
+
+        // })
+    }
 }
 </script>
 
@@ -28,8 +34,8 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 .nav h2{
@@ -40,7 +46,6 @@ export default {
     display: flex;
     width: 25%;
     justify-content: space-between;
-    list-style-type: none;
     align-items: center;
 }
 

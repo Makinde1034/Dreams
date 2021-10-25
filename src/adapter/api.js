@@ -1,4 +1,4 @@
-// const BASE_URL = process.env.VUE_APP_BASE_URL
+const BASE_URL = process.env.VUE_APP_BASE_URL
 import axios from "axios";
 
 
@@ -11,9 +11,23 @@ export default {
         return header 
     },
     registerUser(user_details){
-        return axios({url : `https://dreams-apl.herokuapp.com/sign-up`,data:user_details, method:'POST'});
+        return axios({url : `${BASE_URL}/sign-up`,data:user_details, method:'POST'});
     },
+    signIn(user_details){
+        return axios.post(`${BASE_URL}/sign-in`,user_details)
+    },
+
     validateToken(){
-        return axios.get("https://dreams-apl.herokuapp.com/verify-token",{headers : this.getHeader()});
+        return axios.get(`${BASE_URL}/verify-token`,{headers : this.getHeader()});
+    },
+    addEvent(event){
+        return axios.post(`${BASE_URL}/add-event`,event,{headers : this.getHeader()});
+    },
+    getEvent(){
+        return axios.get(`${BASE_URL}/get-events`,{headers : this.getHeader()});
+    },
+    deleteEvent(event_id){
+        // return axios.delete(`${BASE_URL}/delete-event`,event_id);
+        return axios({url : `${BASE_URL}/delete-event`,data:event_id, method:'DELETE'});
     }
 }
