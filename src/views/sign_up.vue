@@ -203,4 +203,16 @@ body{
   margin-top: 10px;
 }
 
+@media screen and  (min-width:320px) and (max-width:480px) {
+
+  .form__wrap{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .form{
+    max-width: 375px;
+  }
+}
+
 </style>

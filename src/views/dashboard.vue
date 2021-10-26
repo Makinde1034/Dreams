@@ -10,7 +10,7 @@
         <p>{{event.details.slice(1,30)}}...</p>
         <div class="icons">
           <img src="../assets/share.png" alt="share icon">
-          <img src="../assets/edit.png" alt="edit icon">
+          <img @click="open_edit_modal" src="../assets/edit.png" alt="edit icon">
           <img @click="delete_event(event._id)" src="../assets/delete.png" alt="delete icon">
         </div>
 
@@ -22,6 +22,7 @@
     <AddEvent />
     <ModalBac />
     <DeleteEventModal />
+    <EditEvent />
   </div>
 </template>
 
@@ -31,26 +32,34 @@ import ModalBac from '../components/modals/modal_background.vue'
 import DeleteEventModal from '../components/modals/delete_modal.vue'
 import { mapActions, mapState} from 'vuex'
 import api from '../adapter/api.js'
+import EditEvent from '../components/modals/edit_event'
 
 export default {
+
   name:"Dashboard",
   components:{
-    AddEvent,ModalBac,DeleteEventModal
+    AddEvent,ModalBac,DeleteEventModal,EditEvent
   },
   methods:{
     ...mapActions('toggleModule',['OPEN_EVENT_MODAL']),
     ...mapActions("eventModule",["GET_EVENTS"]),
     ...mapActions("toggleModule",["OPEN_DELETE_MODAL"]),
+    ...mapActions("toggleModule",["OPEN_EDIT_MODAL"]),
     
 
     open_event_modal(){
       this.OPEN_EVENT_MODAL()
     },
+
     delete_event(_id){
       const data = {
         event_id : _id
       }
       this.OPEN_DELETE_MODAL(data)
+    },
+
+    open_edit_modal(){
+      this.OPEN_EDIT_MODAL()
     }
   },
   computed : {
@@ -77,6 +86,8 @@ export default {
 
 <style scoped>
 
+
+
 .dashboard{
   height: 92vh;
   display: flex;
@@ -95,21 +106,21 @@ export default {
 }
 
 .addicon{
-  position: absolute;
+  position: fixed;
   bottom: 50px;
   right: 50px;
   height: 50px;
   cursor: pointer;
 }
 
-
+/* 
 .dashboardActive{
   padding-top: 50px;
   justify-content: center;
+  align-items: center;
   padding-left: 50px;
   padding-right: 50px;
   display: grid; 
-   grid-template-columns: repeat(auto-fill, 186px);
 
   grid-template-columns: 300px 300px 300px 300px; 
   grid-template-rows: 150px 150px 150px; 
@@ -118,6 +129,22 @@ export default {
     ". . . ."
     ". . . ."
     ". . . ."; 
+    
+
+} */
+
+.dashboardActive{
+  
+   display: grid;
+  grid-template-columns: auto auto auto auto ;
+  
+  /* grid-template-rows: auto auto auto; */
+  /* justify-content: center; */
+  gap: 50px 50px;
+  padding-right: 50px;
+  padding-left: 50px;
+  padding-top: 50px;
+
 
 }
 
@@ -127,6 +154,9 @@ export default {
   filter: brightness(1.2);
   padding: 10px;
   position: relative;
+  height : 150px;
+  width:300px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .dashboardActive__div h3{
@@ -154,5 +184,34 @@ export default {
   cursor: pointer;
 }
 
+@media screen and  (min-width:320px) and (max-width:480px) {
+  /* *{
+    border: 1px solid red;
+  } */
+
+
+  .wrap{
+    align-items: center;
+    padding-bottom: 100px;
+  }
+
+  .dashboardActive{
+    grid-template-columns: auto;
+    justify-content: center;
+    padding-top: 50px;
+    
+
+  }
+
+  .dashboardActive__div{
+    max-width: 300px;
+  }
+
+  .addicon{
+    right: 20px;
+    height: 50px;
+  }
+  
+}
 
 </style>

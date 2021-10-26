@@ -29,7 +29,7 @@ export default {
   },
   mounted(){
     api.validateToken().then(()=>{
-      this.$router.push("/signup")
+      this.$router.push("/dashboard")
     }).catch((err)=>{
       console.log(err.response)
       localStorage.clear()
@@ -98,5 +98,24 @@ body{
   border: none;
   cursor: pointer;
   margin-top: 20px;
+}
+
+@media screen and  (min-width:320px) and (max-width:480px) {
+  .home{
+    padding-left:20px;
+    padding-right:20px;
+  }
+  .home img{
+    max-width: 300px;
+    height: 300px;
+  }
+
+  .home h3{
+    font-size: 20px;
+  }
+
+  .home p{
+    width: 100%;
+  }
 }
 </style>

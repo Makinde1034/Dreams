@@ -1,12 +1,12 @@
 <template>
   <div class="wrap">
-    <div :class="isOpen ? [ 'addEvent','addEvent--active'] : 'addEvent' ">
-      <form @submit.prevent="add_event" class="addEvent__form">
-            <header class="addEvent__header">
-                <h3>Add Event</h3>
+    <div :class="is_open ? [ 'editEvent','editEvent--active'] : 'editEvent' ">
+      <form @submit.prevent="add_event" class="editEvent__form">
+            <header class="editEvent__header">
+                <h3>Edit Event</h3>
             </header>
-            <input v-model="event.title" required class="addEvent__form__title" placeholder="title" type="text">
-            <textarea v-model="event.details" required class="addEvent__form__detail" name="" id="" cols="30" rows="10"></textarea>
+            <input v-model="event.title" required class="editEvent__form__title" placeholder="title" type="text">
+            <textarea v-model="event.details" required class="editEvent__form__detail" name="" id="" cols="30" rows="10"></textarea>
             <button>
                 <p v-if="!loading">Add event</p>
                 <div v-else class="loader"></div>
@@ -21,7 +21,7 @@
 
 <script>
 
-import { mapState,mapActions } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
     data(){
@@ -34,23 +34,20 @@ export default {
       }
     },
     methods:{
-        ...mapActions("eventModule",["ADD_EVENT"]),
-        add_event(){
-            this.ADD_EVENT(this.event)
-        }
+      
+       
     },
     computed : {
-        ...mapState({
-            isOpen : (state) => state.toggleModule.addEventModal,
-            loading : (state) => state.eventModule.loading ,
-            status : (state) => state.eventModule.status
-        })
+          ...mapState({
+              is_open : (state) => state.toggleModule.editModal
+          })
     }
 }
 </script>
 
-<style scoped>
-.addEvent{
+<style scoped >
+
+.editEvent{
     position: fixed;
     left: 50%;
     top: 50%;
@@ -66,31 +63,31 @@ export default {
    
 }
 
-.addEvent--active{
+.editEvent--active{
     visibility: visible;
     opacity: 1;
     transform: translate(-50%,-50%) scale(1);
 }
 
-.addEvent__header{
+.editEvent__header{
     display: flex;
     justify-content: center;
     padding-top: 20px;
 }
 
-.addEvent__header h3{
+.editEvent__header h3{
     color: white;
     font-size: 20px;
     text-align: center;
 
 }
 
-.addEvent__form{
+.editEvent__form{
     padding-left: 20px;
     padding-right: 20px;
 }
 
-.addEvent__form__title{
+.editEvent__form__title{
     width: 100%;
     height: 50px;
     background: none;
@@ -102,7 +99,7 @@ export default {
 }
 
 
-.addEvent__form__detail{
+.editEvent__form__detail{
     width: 100%;
     height: 200px;
     background: none;
@@ -113,7 +110,7 @@ export default {
   
 }
 
-.addEvent__form button{
+.editEvent__form button{
     height: 50px;
     width: 150px;
     background: #6966FF;
@@ -172,7 +169,7 @@ export default {
   }
 
 
-  .addEvent{
+  .editEvent{
     width: 95%;
   }
   

@@ -63,10 +63,12 @@ const auth = {
         },
         AUTH_SUCCESS(state){
             state.loading = false
+            state.status = "success"
         },
         AUTH_FAILURE(state,payload){
             state.error_message = payload
-            state.loading = false  
+            state.loading = false ,
+            state.status = "failure"
         }
     }
 }

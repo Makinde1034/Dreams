@@ -5,24 +5,33 @@
        </router-link>
     
       <ul>
-        <router-link to="/signin">About</router-link>
-        <router-link to="/signin">Signin</router-link>
-        <router-link to="/signup">
+        <router-link  v-if="!status === 'success' "   to="/signin">About</router-link>
+        <router-link v-if="!status === 'success' "  to="/signin">Signin</router-link>
+        <router-link v-if="!status === 'success' "  to="/signup">
             <button>Sign up</button>
         </router-link>
         
       </ul>
+      <div class="menu">
+          <img src="../assets/list.png" alt="">
+      </div>
+      <button class="logout">Logout</button>
   </nav>
 </template>
 
 <script>
-// import {mapState,mapActions} from 'vuex'
+import {mapState} from 'vuex'
 
 export default {
     computed : {
-        // ...mapState({
+        ...mapState({
+            status : (state) => state.authModule.status
+        })
+    },
 
-        // })
+    mounted(){
+        
+       
     }
 }
 </script>
@@ -40,6 +49,8 @@ export default {
 
 .nav h2{
     color: white;
+    font-family: 'Montserrat', sans-serif;
+
 }
 
 .nav ul{
@@ -69,5 +80,41 @@ export default {
 
 .nav ul button:hover{
     opacity: 0.6;
+}
+
+.logout{
+     padding: 10px 20px;
+    background: #6966FF;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.menu img{
+    display: none;
+}
+
+@media screen and  (min-width:320px) and (max-width:480px) {
+    .nav{
+         padding-left: 20px;
+        padding-right: 20px;
+    }
+    .nav ul {
+        display: none;
+       
+    }
+
+    .logout{
+        display: none;
+    }
+
+    .menu img{
+        height: 25px;
+        display: block;
+    }
+
+    
 }
 </style>

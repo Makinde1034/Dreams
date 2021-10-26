@@ -1,5 +1,5 @@
 <template>
-  <div @click="close_modal" :class=" is_modal_open || is_delete_modal_open ? ['modalBackground','modalBackground--active'] : 'modalBackground' " >
+  <div @click="close_modal" :class=" is_modal_open || is_delete_modal_open || is_edit_modal_open ? ['modalBackground','modalBackground--active'] : 'modalBackground' " >
 
   </div>
 </template>
@@ -17,7 +17,8 @@ export default {
     computed : {
         ...mapState({
             is_modal_open : (state) => state.toggleModule.addEventModal,
-            is_delete_modal_open : (state) => state.toggleModule.deleteModal
+            is_delete_modal_open : (state) => state.toggleModule.deleteModal,
+            is_edit_modal_open : (state) => state.toggleModule.editModal
         })
     }
 }
