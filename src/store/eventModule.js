@@ -52,8 +52,26 @@ const event = {
                     console.log(res);
                     commit("")
                     dispatch("GET_EVENTS")
-                    dispatch("toggleModule/CLOSE_DELETE_MODAL",null,{root:true})
+                    dispatch("toggleModule/CLOSE_DELETE_MODAL",null,{root:true}) 
                 }).catch(err =>{
+                    reject(err)
+                })
+            })
+        },
+        EDIT_EVENT({dispatch},newData){
+            return new Promise((resolve,reject)=>{
+                const event_id = localStorage.getItem("edit_id");
+                const data = {
+                    title : newData.title,
+                    details : newData.details,
+                    event_id : event_id
+                }
+                api.editEvent(data).then((res)=>{
+                    console.log(res)
+                    resolve(res)
+                    dispatch("GET_EVENTS");
+                }).catch((err)=>{
+                    console.log(err);
                     reject(err)
                 })
             })
@@ -75,6 +93,8 @@ const event = {
         GET_EVENTS_SUCCESS(state,payload){
             state.events = payload
         }
+        // edit event 
+
     }
 }
 

@@ -5,10 +5,10 @@
             <header class="editEvent__header">
                 <h3>Edit Event</h3>
             </header>
-            <input v-model="event.title" required class="editEvent__form__title" placeholder="title" type="text">
-            <textarea v-model="event.details" required class="editEvent__form__detail" name="" id="" cols="30" rows="10"></textarea>
-            <button>
-                <p v-if="!loading">Add event</p>
+            <input v-model="prev_info.title" required class="editEvent__form__title" placeholder="title" type="text">
+            <textarea v-model="prev_info.details" required class="editEvent__form__detail" name="" id="" cols="30" rows="10"></textarea>
+            <button @click="edit_event">
+                <p v-if="!loading">Edit event</p>
                 <div v-else class="loader"></div>
             </button>
             <p class="status">{{status}}</p>
@@ -21,45 +21,51 @@
 
 <script>
 
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
-    data(){
-      return{
-        event : {
-            title : "",
-            details : ""
-        }
-          
-      }
-    },
-    methods:{
+  data(){
+    return{
       
-       
-    },
-    computed : {
-          ...mapState({
-              is_open : (state) => state.toggleModule.editModal
-          })
+        
     }
+  },
+  methods:{
+    ...mapActions('eventModule',['EDIT_EVENT']),
+
+    edit_event(){
+      const newData = {
+        title : this.prev_info.title,
+        details : this.prev_info.details
+      }
+      this.EDIT_EVENT(newData);
+    }
+      
+  },
+  computed : {
+    ...mapState({
+      is_open : (state) => state.toggleModule.editModal,
+      prev_info : (state) => state.toggleModule.prevInfo
+    })
+  }
 }
 </script>
 
 <style scoped >
 
 .editEvent{
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%) scale(0.8);
-    width: 500px;
-    background: #232334;
-    border-radius: 10px;
-    padding-bottom: 30px;
-    visibility: hidden;
-    transition: 0.5s ease;
-    opacity: 0;
-    z-index: 4;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%) scale(0.8);
+  width: 500px;
+  background: #232334;
+  border-radius: 10px;
+  padding-bottom: 30px;
+  visibility: hidden;
+  transition: 0.5s ease;
+  opacity: 0;
+  z-index: 4;
    
 }
 
@@ -88,38 +94,39 @@ export default {
 }
 
 .editEvent__form__title{
-    width: 100%;
-    height: 50px;
-    background: none;
-    color: white;
-    border: 1px solid #6966FF;
-    margin-top: 30px;
-    border-radius: 5px;
+  width: 100%;
+  height: 50px;
+  background: none;
+  color: white;
+  border: 1px solid #6966FF;
+  margin-top: 30px;
+  border-radius: 5px;
   
 }
 
 
 .editEvent__form__detail{
-    width: 100%;
-    height: 200px;
-    background: none;
-    color: white;
-    border: 1px solid #6966FF;
-    margin-top: 30px;
-    border-radius: 5px;
+  width: 100%;
+  height: 200px;
+  background: none;
+  color: white;
+  border: 1px solid #6966FF;
+  margin-top: 30px;
+  border-radius: 5px;
   
 }
 
 .editEvent__form button{
-    height: 50px;
-    width: 150px;
-    background: #6966FF;
-    color: white;
-     margin-top: 30px;
-     border: none;
-     display: flex;
-     align-items: center;
-     justify-content: center;
+  height: 50px;
+  width: 150px;
+  background: #6966FF;
+  color: white;
+  margin-top: 30px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .loader{

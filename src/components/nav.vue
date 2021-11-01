@@ -5,9 +5,9 @@
        </router-link>
     
       <ul>
-        <router-link  v-if="!status === 'success' "   to="/signin">About</router-link>
-        <router-link v-if="!status === 'success' "  to="/signin">Signin</router-link>
-        <router-link v-if="!status === 'success' "  to="/signup">
+        <router-link  v-if=" !token"   to="/signin">About</router-link>
+        <router-link v-if="!token "   to="/signin">Signin</router-link>
+        <router-link  v-if="!token"   to="/signup">
             <button>Sign up</button>
         </router-link>
         
@@ -15,7 +15,7 @@
       <div class="menu">
           <img src="../assets/list.png" alt="">
       </div>
-      <button class="logout">Logout</button>
+      <button v-if="token" class="logout">Logout</button>
   </nav>
 </template>
 
@@ -25,7 +25,8 @@ import {mapState} from 'vuex'
 export default {
     computed : {
         ...mapState({
-            status : (state) => state.authModule.status
+            status : (state) => state.authModule.status,
+            token : (state) => state.authModule.token
         })
     },
 
@@ -90,6 +91,10 @@ export default {
     border: none;
     cursor: pointer;
     transition: 0.2s;
+}
+
+.menu{
+    display: none;
 }
 
 .menu img{

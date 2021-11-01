@@ -8,7 +8,8 @@ const auth = {
         return {
             status : "",
             loading : false,
-            error_message : ""
+            error_message : "",
+            token : localStorage.getItem("token") || ''
         }
     },
     getters : {
@@ -45,7 +46,7 @@ const auth = {
                     console.log(res)
                     const token = res.data.token
                     localStorage.setItem("token",token);
-                    commit("AUTH_SUCCESS")
+                    commit("AUTH_SUCCESS",token)
                     router.push('/dashboard');
                     resolve(res)
                 }).catch(err=>{
@@ -61,14 +62,17 @@ const auth = {
         AUTH_REQUEST(state){
             state.loading = true
         },
-        AUTH_SUCCESS(state){
+        AUTH_SUCCESS(state,token){
             state.loading = false
-            state.status = "success"
+            state.status = "success",
+            state.token = token
+         
         },
         AUTH_FAILURE(state,payload){
             state.error_message = payload
             state.loading = false ,
             state.status = "failure"
+      
         }
     }
 }

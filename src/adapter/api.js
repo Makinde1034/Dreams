@@ -28,6 +28,9 @@ export default {
     },
     deleteEvent(event_id){
         // return axios.delete(`${BASE_URL}/delete-event`,event_id);
-        return axios({url : `${BASE_URL}/delete-event`,data:event_id, method:'DELETE'});
+        return axios({url : `${BASE_URL}/delete-event`,data:event_id, method:'DELETE',headers:this.getHeader()});
+    },
+    editEvent(data){
+        return axios({url :`${BASE_URL}/edit-event`,data:data, method:"PUT"})
     }
 }

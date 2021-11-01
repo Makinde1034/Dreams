@@ -1,8 +1,7 @@
 <template>
   <div class="wrap">
     <div v-if="events.length === 0" class="dashboard">
-        <h3>Hello Bryan, click the add icon to <br> start adding events.</h3>
-        
+      <h3>Hello Bryan, click the add icon to <br> start adding events.</h3>
     </div>
     <div v-else class="dashboardActive" >
       <div class="dashboardActive__div" v-for="(event,index) in events" :key="index" >
@@ -10,7 +9,7 @@
         <p>{{event.details.slice(1,30)}}...</p>
         <div class="icons">
           <img src="../assets/share.png" alt="share icon">
-          <img @click="open_edit_modal" src="../assets/edit.png" alt="edit icon">
+          <img @click="open_edit_modal(title=event.title,details=event.details,_id=event._id)" src="../assets/edit.png" alt="edit icon">
           <img @click="delete_event(event._id)" src="../assets/delete.png" alt="delete icon">
         </div>
 
@@ -58,8 +57,13 @@ export default {
       this.OPEN_DELETE_MODAL(data)
     },
 
-    open_edit_modal(){
-      this.OPEN_EDIT_MODAL()
+    open_edit_modal(title,details,_id){
+      const data = {
+        title,
+        details,
+        _id
+      }
+      this.OPEN_EDIT_MODAL(data)
     }
   },
   computed : {
@@ -76,7 +80,7 @@ export default {
     })
 
     // 
-    this.GET_EVENTS()
+    this.GET_EVENTS();
     
   
   }
