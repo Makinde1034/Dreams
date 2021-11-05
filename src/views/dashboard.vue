@@ -139,7 +139,7 @@ export default {
 
 .dashboardActive{
   
-   display: grid;
+  display: grid;
   grid-template-columns: auto auto auto auto ;
   
   /* grid-template-rows: auto auto auto; */
@@ -188,7 +188,7 @@ export default {
   cursor: pointer;
 }
 
-@media screen and  (min-width:320px) and (max-width:480px) {
+@media screen and  (min-width:280px) and (max-width:480px) {
   /* *{
     border: 1px solid red;
   } */
@@ -200,15 +200,22 @@ export default {
   }
 
   .dashboardActive{
-    grid-template-columns: auto;
+    /* grid-template-columns: 100%;
     justify-content: center;
+    align-items: center;
     padding-top: 50px;
-    
+    padding-left: 20px;
+    padding-right: 20px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
 
   }
 
   .dashboardActive__div{
-    max-width: 300px;
+    max-width: 100%;
   }
 
   .addicon{
