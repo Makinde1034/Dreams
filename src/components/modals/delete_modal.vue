@@ -80,4 +80,14 @@ export default {
     margin-top: 20px;
 }
 
+
+@media screen and  (min-width:280px) and (max-width:480px) {
+
+    .deleteEvent{
+        max-width: 500px;
+    }
+
+    
+}
+
 </style>

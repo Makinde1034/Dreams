@@ -56,6 +56,12 @@ const auth = {
                     console.log(err.response)
                 })
             })
+        },
+        LOG_OUT({commit}){
+            localStorage.clear();
+            router.push("/");
+            commit("LOG_OUT")
+
         }
     },
     mutations : {
@@ -73,6 +79,10 @@ const auth = {
             state.loading = false ,
             state.status = "failure"
       
+        },
+        LOG_OUT(state){
+            state.token = ""
+            state.status = ""
         }
     }
 }

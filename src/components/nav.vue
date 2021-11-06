@@ -13,20 +13,33 @@
         
       </ul>
       <div class="menu">
-          <img src="../assets/list.png" alt="">
+          <img @click="open_mobile_nav" src="../assets/list.png" alt="">
       </div>
-      <button v-if="token" class="logout">Logout</button>
+      <button @click="log_out" v-if="token" class="logout">Logout</button>
   </nav>
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapState,mapActions} from 'vuex'
 
 export default {
+    methods:{
+        ...mapActions('toggleModule',['OPEN_MOBILE_MODAL']),
+        ...mapActions('authModule',['LOG_OUT']),
+
+        open_mobile_nav(){
+            this.OPEN_MOBILE_MODAL();
+        },
+        log_out(){
+            this.LOG_OUT()
+        }
+
+    },
     computed : {
         ...mapState({
             status : (state) => state.authModule.status,
-            token : (state) => state.authModule.token
+            token : (state) => state.authModule.token,
+            // mobile_nav : (state) => state.toggleModule.mobileModal
         })
     },
 
@@ -46,6 +59,7 @@ export default {
     align-items: center;
     padding-left: 50px;
     padding-right: 50px;
+   
 }
 
 .nav h2{
@@ -103,17 +117,25 @@ export default {
 
 @media screen and  (min-width:280px) and (max-width:480px) {
     .nav{
-         padding-left: 20px;
+        padding-left: 20px;
         padding-right: 20px;
     }
+
     .nav ul {
         display: none;
        
     }
 
+
     .logout{
         display: none;
     }
+
+
+    .menu{
+        display: block;
+    }
+
 
     .menu img{
         height: 25px;

@@ -22,6 +22,7 @@
     <ModalBac />
     <DeleteEventModal />
     <EditEvent />
+  
   </div>
 </template>
 
@@ -32,6 +33,7 @@ import DeleteEventModal from '../components/modals/delete_modal.vue'
 import { mapActions, mapState} from 'vuex'
 import api from '../adapter/api.js'
 import EditEvent from '../components/modals/edit_event'
+
 
 export default {
 

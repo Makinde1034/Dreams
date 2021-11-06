@@ -1,6 +1,8 @@
 <template>
   <div>
     <Nav />
+    <MobileNav />
+    <ModalBackground />
     <router-view v-slot="{Component}">
       <transition name="route">
         <component :is="Component" ></component>
@@ -11,12 +13,16 @@
 
 <script>
 import Nav from './components/nav.vue'
+import MobileNav from './components/modals/mobile_nav.vue'
+import ModalBackground from './components/modals/modal_background.vue'
 
 
 export default {
   name: 'App',
   components: {
-    Nav
+    Nav,
+    MobileNav,
+    ModalBackground
   }
 }
 </script>

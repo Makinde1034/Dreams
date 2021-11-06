@@ -5,6 +5,7 @@ const togglers = {
             addEventModal : false,
             deleteModal : false,
             editModal : false,
+            mobileModal : false,
             // previous info to be edited
             prevInfo : {
                 title :"",
@@ -23,6 +24,7 @@ const togglers = {
             commit("CLOSE_MODAL");
             commit("CLOSE_DELETE_MODAL");
             commit("CLOSE_EDIT_MODAL");
+            commit("CLOSE_MOBILE_MODAL");
         },
         // delete
         OPEN_DELETE_MODAL({commit},data){
@@ -36,6 +38,15 @@ const togglers = {
         OPEN_EDIT_MODAL({commit},data){
             commit("OPEN_EDIT_MODAL",data);
             localStorage.setItem("edit_id",data._id)
+        },
+        // mobile modal
+        OPEN_MOBILE_MODAL({commit}){
+            commit("OPEN_MOBILE_MODAL");
+            
+            
+        },
+        CLOSE_MOBILE_MODAL({commit}){
+            commit("CLOSE_MOBILE_MODAL")
         }
     },
     mutations : {
@@ -52,6 +63,7 @@ const togglers = {
         CLOSE_DELETE_MODAL(state){
             state.deleteModal = false
         },
+        // EDIT MODAL
         OPEN_EDIT_MODAL(state,{title,details}){
             state.editModal = true
             state.prevInfo.title = title,
@@ -59,6 +71,13 @@ const togglers = {
         },
         CLOSE_EDIT_MODAL(state){
             state.editModal =false
+        },
+        // mobile modal
+        OPEN_MOBILE_MODAL(state){
+            state.mobileModal = true
+        },
+        CLOSE_MOBILE_MODAL(state){
+            state.mobileModal = false
         }
     }
 }

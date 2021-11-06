@@ -13,7 +13,6 @@
 import { mapState } from 'vuex'
 import api from '../adapter/api.js'
 
-
 export default {
   name: "Home",
   components : {},
