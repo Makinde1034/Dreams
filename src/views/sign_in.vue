@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="form__button">
-       <button>
+       <button :disabled="isDisabled" >
         <p v-if="!is_loading">Sign in</p>
         <div v-else class="loader"></div>
       </button>
@@ -36,7 +36,9 @@ export default {
     return {
       user_details : {
         email : "",
-        password : ""
+        password : "",
+       
+
       }
     }
   },
@@ -50,7 +52,8 @@ export default {
   computed : {
     ...mapState({
       is_loading : (state) => state.authModule.loading,
-      err_msg : (state) => state.authModule.error_message
+      err_msg : (state) => state.authModule.error_message,
+      isDisabled : (state) => state.authModule.isDisabled
     })
   },
   mounted(){

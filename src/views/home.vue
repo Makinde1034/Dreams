@@ -3,7 +3,9 @@
     <img src="../assets/undraw_friendship_mni7.svg" alt="">
     <h3>The travel diary you <br> ever dreamed of.</h3>
     <p>Write your memories on your card, love, happy, joy, sometimes...sad and painful. You fill in all your feelings.</p>
-    <button>Sign up</button>
+    <router-link to="/signup">
+      <button>Sign up</button>
+    </router-link>
   </div>
 </template>
 
@@ -18,7 +20,7 @@ export default {
   components : {},
   data(){
     return{
-
+      
     }
   },
   computed:{
@@ -78,7 +80,7 @@ body{
 .home h3{
   text-align: center;
   font-size: 50px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .home p{

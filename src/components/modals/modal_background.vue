@@ -30,7 +30,7 @@ export default {
 .modalBackground{
     height: 100vh;
     width: 100%;
-    position: absolute;
+    position: fixed;
     top: 0px;
     background: rgba(0, 0, 0, 0.7);
     z-index: 3;

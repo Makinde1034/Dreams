@@ -9,7 +9,8 @@ const auth = {
             status : "",
             loading : false,
             error_message : "",
-            token : localStorage.getItem("token") || ''
+            token : localStorage.getItem("token") || '',
+            isDisabled : false
         }
     },
     getters : {
@@ -24,7 +25,7 @@ const auth = {
                     console.log(res.data.token)
                     const token = res.data.token
                     localStorage.setItem("token",token)
-                    commit("AUTH_SUCCESS")
+                    commit("AUTH_SUCCESS",token)
                     router.push('/dashboard')
                     resolve(res)  
                 }).catch((err)=>{
@@ -57,27 +58,31 @@ const auth = {
                 })
             })
         },
-        LOG_OUT({commit}){
+        LOG_OUT({commit,dispatch}){
             localStorage.clear();
             router.push("/");
-            commit("LOG_OUT")
+            commit("LOG_OUT");
+            dispatch("toggleModule/CLOSE_MOBILE_MODAL",null,{root:true}) 
 
         }
     },
     mutations : {
         AUTH_REQUEST(state){
             state.loading = true
+            state.isDisabled = true
         },
         AUTH_SUCCESS(state,token){
             state.loading = false
             state.status = "success",
             state.token = token
+            state.isDisabled = false
          
         },
         AUTH_FAILURE(state,payload){
             state.error_message = payload
             state.loading = false ,
             state.status = "failure"
+            state.isDisabled = false
       
         },
         LOG_OUT(state){

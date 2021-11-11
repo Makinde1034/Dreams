@@ -4,9 +4,13 @@
       <h3>Hello Bryan, click the add icon to <br> start adding events.</h3>
     </div>
     <div v-else class="dashboardActive" >
-      <div class="dashboardActive__div" v-for="(event,index) in events" :key="index" >
-        <h3>{{event.title}}</h3>
-        <p>{{event.details.slice(1,30)}}...</p>
+      <div class="dashboardActive__div"  v-for="(event,index) in events" :key="index" >
+        <div class="title">
+          <h3 @click="go_to_event(event._id)">{{event.title}}</h3>
+          <p class="title__para">{{event.created_at.slice(0,10)}}</p>
+        </div>
+       
+        <p class="para">{{event.details.slice(1,30)}}...</p>
         <div class="icons">
           <img src="../assets/share.png" alt="share icon">
           <img @click="open_edit_modal(title=event.title,details=event.details,_id=event._id)" src="../assets/edit.png" alt="edit icon">
@@ -66,6 +70,9 @@ export default {
         _id
       }
       this.OPEN_EDIT_MODAL(data)
+    },
+    go_to_event(_id){
+      this.$router.push({name:"dream",params:{id:_id}})
     }
   },
   computed : {
@@ -108,7 +115,6 @@ export default {
   font-size: 44px;
   font-family: 'Montserrat', sans-serif;
   text-align: center;
-
 }
 
 .addicon{
@@ -165,14 +171,26 @@ export default {
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
+.title{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title__para{
+  color:white;
+}
+
+
 .dashboardActive__div h3{
   color: white;
-   font-family: 'Montserrat', sans-serif;
-   font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
 
 }
 
-.dashboardActive div p{
+.para{
   color: white;
   font-weight: 400;
   margin-top: 10px;
@@ -190,7 +208,7 @@ export default {
   cursor: pointer;
 }
 
-@media screen and  (min-width:280px) and (max-width:480px) {
+@media screen and  (min-width:280px) and (max-width:768px) {
   /* *{
     border: 1px solid red;
   } */
@@ -218,6 +236,7 @@ export default {
 
   .dashboardActive__div{
     max-width: 100%;
+    margin-bottom: 20px;
   }
 
   .addicon{

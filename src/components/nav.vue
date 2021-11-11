@@ -115,7 +115,7 @@ export default {
     display: none;
 }
 
-@media screen and  (min-width:280px) and (max-width:480px) {
+@media screen and  (min-width:280px) and (max-width:768px) {
     .nav{
         padding-left: 20px;
         padding-right: 20px;

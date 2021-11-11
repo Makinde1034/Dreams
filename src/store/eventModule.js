@@ -9,7 +9,6 @@ const event = {
             events : [],
             status : "",
             
-            
         }
     },
     getters:{

@@ -164,7 +164,7 @@ export default {
     font-size: 16px;
     margin-top: 20px;
 }
-@media screen and  (min-width:320px) and (max-width:480px) {
+@media screen and  (min-width:320px) and (max-width:768px) {
   /* *{
     border: 1px solid red;
   } */

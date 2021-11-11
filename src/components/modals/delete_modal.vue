@@ -81,7 +81,7 @@ export default {
 }
 
 
-@media screen and  (min-width:280px) and (max-width:480px) {
+@media screen and  (min-width:280px) and (max-width:768px) {
 
     .deleteEvent{
         max-width: 500px;

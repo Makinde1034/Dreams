@@ -10,7 +10,8 @@ const togglers = {
             prevInfo : {
                 title :"",
                 details : ""
-            }
+            },
+            
         }
     },
     getters : {

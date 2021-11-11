@@ -2,8 +2,10 @@
   <div>
       <div :class=" mobile_nav ? ['mobileNav', 'mobileNav--active'] : 'mobileNav' ">
           <ul>
-              <router-link to="/signin" @click="close_mobile_modal" >Sign in</router-link>
-              <router-link to="/signup" @click="close_mobile_modal" >Sign up</router-link>
+              <router-link v-if="!token" to="/signin" @click="close_mobile_modal" >Sign in</router-link>
+              <router-link v-if="!token" to="/signup" @click="close_mobile_modal" >Sign up</router-link>
+              <li v-if="token" @click="log_out">Log out</li>
+              <li>About</li>
               <!-- <li>Sign out</li> -->
           </ul>
       </div>
@@ -24,14 +26,20 @@ export default {
     },
     methods:{
         ...mapActions('toggleModule',['CLOSE_MOBILE_MODAL']),
+        ...mapActions('authModule',['LOG_OUT']),
+
         close_mobile_modal(){
             this.CLOSE_MOBILE_MODAL()
+        },
+        log_out(){
+            this.LOG_OUT();
         }
 
     },
     computed:{
         ...mapState({
-            mobile_nav : (state) => state.toggleModule.mobileModal
+            mobile_nav : (state) => state.toggleModule.mobileModal,
+            token : (state) => state.authModule.token
         })
     }
     
@@ -70,6 +78,7 @@ export default {
     color: white;
     display: flex;
     flex-direction: column;
+    list-style: none;
 }
 
 .mobileNav a{
@@ -79,5 +88,15 @@ export default {
     text-decoration: none;
     font-size: 20px;
     margin-bottom: 20px;
+}
+
+.mobileNav li{
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 </style>
